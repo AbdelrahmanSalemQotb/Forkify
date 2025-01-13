@@ -1,0 +1,17 @@
+@use "base";
+
+@mixin header-preview {
+  opacity: 0;
+  visibility: hidden;
+
+  box-shadow: 0 0.8rem 5rem 2rem rgba(base.$color-grey-dark-1, 0.1);
+  transition: all 0.2s 0.2s linear;
+  background-color: #fff;
+  backdrop-filter: blur(2rem);
+  z-index: 10;
+  max-height: 60vh;
+  width: 40rem;
+  max-width: 75vw;
+  padding: 1rem 0;
+  position: absolute;
+}

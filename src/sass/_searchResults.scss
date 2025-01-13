@@ -1,0 +1,126 @@
+@use 'base';
+
+.search-results {
+  display: flex;
+  flex-direction: column;
+  max-width: 45rem;
+  visibility: visible;
+  opacity: 1;
+
+  &__control {
+    margin: 0 1rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  @media only screen and (max-width: base.$bp-large) {
+    position: fixed;
+    z-index: 500;
+    height: 100dvh;
+    left: 0;
+    background-color: white;
+    transform: translateX(0%);
+    transition: 0.7s ease-in-out;
+    visibility: visible;
+    opacity: 1;
+    max-width: 80dvw;
+    width: fit-content;
+
+    &.hidden {
+      transform: translateX(-100%);
+      transition: 0.7s ease-in-out;
+      visibility: hidden;
+      opacity: 0;
+    }
+  }
+}
+
+.search-results__control {
+  padding-top: 1rem;
+  display: flex;
+  justify-content: flex-end;
+  justify-items: flex-end;
+  position: relative;
+
+  .btn--close-search-results {
+    font-family: inherit;
+    color: inherit;
+    font-size: 2.4rem;
+    cursor: pointer;
+    border: none;
+    background: none;
+    display: none;
+  }
+
+  @media only screen and (max-width: base.$bp-large) {
+    padding: 1rem 0.5rem 1rem;
+
+    .btn--close-search-results {
+      display: block;
+    }
+  }
+}
+
+.results {
+  list-style-type: none;
+  margin-bottom: 2rem;
+}
+
+.pagination {
+  margin-top: auto;
+  padding: 0 3.5rem;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+  justify-items: center;
+
+  &__page {
+    color: base.$color-primary;
+    font-size: 1.5rem;
+    font-weight: 800;
+    grid-area: 1 / 2;
+  }
+
+  &__btn {
+    &--prev {
+      grid-area: 1/1;
+    }
+    &--next {
+      grid-area: 1/3;
+    }
+  }
+}
+
+.copyright {
+  color: base.$color-grey-dark-2;
+  font-size: 1.2rem;
+  padding: 0 3.5rem;
+  margin-top: 4rem;
+
+  .twitter-link:link,
+  .twitter-link:visited {
+    color: base.$color-grey-dark-2;
+  }
+}
+
+.search-results__overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100dvw;
+  height: 100dvh;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  z-index: 100;
+  transition: all 0.5s;
+  &.hidden {
+    visibility: hidden;
+    opacity: 0;
+  }
+  @media only screen and (max-width: base.$bp-large) {
+    display: block;
+  }
+}

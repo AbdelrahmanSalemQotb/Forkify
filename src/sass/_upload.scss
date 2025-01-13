@@ -1,0 +1,203 @@
+@use "base";
+
+.add-recipe-window {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 95rem;
+  background-color: white;
+  border-radius: 9px;
+  padding: 5rem 6rem 6rem;
+  box-shadow: 0 4rem 6rem rgba(0, 0, 0, 0.25);
+  z-index: 1000;
+  transition: all 0.5s;
+
+  @media only screen and (max-width: base.$bp-medium) {
+    width: 90dvw;
+  }
+  @media only screen and (max-width: base.$bp-small) {
+    padding: 5rem 4rem 6rem;
+  }
+  @media only screen and (max-width: base.$bp-smallest) {
+    padding: 5rem 2rem 6rem;
+  }
+
+  .btn--close-modal {
+    font-family: inherit;
+    color: inherit;
+    position: absolute;
+    top: 0.5rem;
+    right: 1.6rem;
+    font-size: 3.5rem;
+    cursor: pointer;
+    border: none;
+    background: none;
+  }
+  &.hidden {
+    visibility: hidden;
+    opacity: 0;
+  }
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100dvw;
+  height: 100dvh;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  z-index: 100;
+  transition: all 0.5s;
+  &.hidden {
+    visibility: hidden;
+    opacity: 0;
+  }
+}
+
+.upload {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 4rem 6rem;
+  max-height: 100%;
+  overflow: auto;
+  margin-bottom: 1rem;
+
+  &__column {
+    max-height: 100%;
+    overflow: auto;
+    display: grid;
+    grid-template-columns: 1fr 2.8fr;
+    align-items: center;
+    gap: 1.5rem;
+    align-content: start;
+    justify-items: start;
+    overflow-x: hidden;
+
+    @media only screen and (max-width: base.$bp-medium) {
+      max-width: 100%;
+    }
+
+    &--ingredients {
+      grid-template-columns: 1fr;
+      max-height: 41rem;
+      overflow-y: auto;
+      & button {
+        justify-self: center;
+      }
+    }
+
+    & label {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: inherit;
+    }
+
+    & input {
+      font-size: 1.5rem;
+      padding: 0.8rem 1rem;
+      border: 1px solid #ddd;
+      border-radius: 0.5rem;
+      transition: all 0.2s;
+
+      &::placeholder {
+        color: base.$color-grey-light-3;
+        font-size: 1.3rem;
+      }
+
+      &:focus {
+        outline: none;
+        border: 1px solid base.$color-primary;
+        background-color: base.$color-grey-light-1;
+      }
+    }
+  }
+
+  &__ingredient {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    &--container {
+      display: grid;
+      grid-template-columns: repeat(2, auto) 1fr;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    &--quantity,
+    &--unit {
+      width: 7rem;
+    }
+
+    &:hover .delete-ing {
+      cursor: pointer;
+      opacity: 1;
+    }
+    & .delete-ing {
+      background-color: transparent;
+      border: none;
+      padding: 1rem;
+      opacity: 0;
+
+      & svg {
+        width: 2rem;
+        height: 2rem;
+      }
+    }
+  }
+
+  &__heading {
+    font-size: 2.25rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    grid-column: 1/-1;
+  }
+
+  &__btn {
+    justify-self: center;
+    position: absolute;
+    left: 50%;
+    bottom: 0.5rem;
+    transform: translateX(-50%);
+  }
+
+  @media only screen and (max-width: base.$bp-large) {
+    gap: 1rem;
+  }
+
+  @media only screen and (max-width: base.$bp-medium) {
+    grid-template-columns: 1fr;
+    justify-content: center;
+    max-height: 80dvh;
+    gap: 2rem 3rem;
+  }
+
+  @media only screen and (max-width: base.$bp-small) {
+    &__column {
+      justify-items: stretch;
+      grid-template-columns: 1fr;
+      max-width: 100%;
+      &:first-child label {
+        display: none;
+      }
+    }
+  }
+  @media only screen and (max-width: base.$bp-smallest) {
+    & .upload__ingredient--container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.2rem;
+      max-width: 100%;
+      & > :not(:last-of-type) {
+        flex: 1;
+      }
+
+      & > :last-of-type {
+        flex: 5;
+      }
+    }
+  }
+}
